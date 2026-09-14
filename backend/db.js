@@ -1,8 +1,8 @@
 import { MongoClient } from 'mongodb';
 
-const mongoUrl = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017';
+const mongoUrl = process.env.MONGODB_URI;
 const databaseName = process.env.MONGODB_DB || 'ein';
-const client = new MongoClient(mongoUrl);
+const client = mongoUrl ? new MongoClient(mongoUrl, { serverSelectionTimeoutMS: 10000 }) : null;
 
 export let db;
 export let users;
@@ -12,6 +12,10 @@ export let alerts;
 export let communityReports;
 
 export async function initDb() {
+  if (!client) {
+    throw new Error('MONGODB_URI is missing. Set it to your MongoDB Atlas connection string in backend/.env.');
+  }
+
   await client.connect();
   db = client.db(databaseName);
   users = db.collection('users');
