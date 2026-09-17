@@ -81,10 +81,12 @@ export const MapComponent: React.FC<MapComponentProps> = ({
       >
         <ChangeView center={center} zoom={zoom} />
         
-        {/* Dark Mode CartoDB TileLayer */}
+        {/* Public tiles without API key requirement */}
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          subdomains="abc"
+          maxZoom={19}
         />
 
         {filteredNodes.map((node) => {
