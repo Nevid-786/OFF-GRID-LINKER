@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { MapContainer, TileLayer, Popup, CircleMarker, useMap } from 'react-leaflet';
 import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import type { NodeItem, SensorType } from '../types';
 import { Link } from 'react-router-dom';
 import { StatusBadge } from './StatusBadge';
@@ -81,10 +82,10 @@ export const MapComponent: React.FC<MapComponentProps> = ({
       >
         <ChangeView center={center} zoom={zoom} />
         
-        {/* Dark Mode CartoDB TileLayer */}
+        {/* Public OpenStreetMap basemap; no provider key is required. */}
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
         {filteredNodes.map((node) => {
